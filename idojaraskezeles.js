@@ -12,20 +12,19 @@ export async function maiidojaras(){
     const maiNap = new Date()
     const minTemp = parseInt(await rl.question("A mai minimum hőmérséklet: "))
     const maxTemp = parseInt(await rl.question("A mai maximum hőmérséklet: "))
-    const idojaras = await rl.question("A mai időjárás (szövegesen):")
+    const idojaras = await rl.question("A mai időjárás (szövegesen): ")
     rl.close();
     return new NapiIdojaras(maiNap.getDay(), minTemp, maxTemp, idojaras)
 }
 
 export function beolvas(){
-const tartalom = fs.readFileSync("./idojaras.csv", "utf-8");
-
-    const sorok = tartalom.trim().split("\n");
+    const tartalom = fs.readFileSync("./idojaras.csv", "utf-8");
     const idojarasok = [];
+    const sorok = tartalom.trim().split("\n");
 
     for (let i = 1; i < sorok.length; i++) {
+        //console.log(sorok[i])
         const sor = sorok[i].split(";");
-
         const nap = sor[0];
         const minTemp = sor[1];
         const maxTemp = sor[2];
